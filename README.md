@@ -118,8 +118,16 @@ Be prepared to demonstrate your understanding of this week's concepts by answeri
 
 1. Explain what a token is used for.
 
+Tokens are used to tell servers who you are. It's a way to determine if you really are the person associated with the token.
+
 2. What steps can you take in your web apps to keep your data secure?
+
+I can make protected/private routes that can lead to certain parts of the app/state. In order to access these parts I can make it so that you would require some sort of token to be able to access those parts of the site.
 
 3. Describe how web servers work.
 
+A web server is basically a computer that holds code to a particular application/website. We as users can send in a request to load a site through these "web servers". 
+
 4. Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+POST, GET, PUT, DELETE

@@ -20,7 +20,6 @@ const Login = () => {
         e.preventDefault();
         axios.post(`http://localhost:9000/api/login`, form)
         .then(res => {
-            console.log(res)
             localStorage.setItem("authToken", res.data.token);
             push('/view');
         })
