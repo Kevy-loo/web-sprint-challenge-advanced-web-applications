@@ -20,11 +20,13 @@ const Login = () => {
         e.preventDefault();
         axios.post(`http://localhost:9000/api/login`, form)
         .then(res => {
+            console.log(res)
             localStorage.setItem("authToken", res.data.token);
             push('/view');
         })
         .catch(err => {
-            setError(err);
+            setError('Incorrect username / password');
+
         })
     };
 
@@ -42,11 +44,11 @@ const Login = () => {
                     password
                     <input id="password" onChange={handleChange} value={form.password} name="password"/>
                 </label>
-                <button type="submit">Login</button>
-            {
-                error && <p id="error">Incorrect username/password</p>
-            }
+                <button id="submit">Login</button>
             </form>
+            {
+                error && <p id="error">{error}</p>
+            }
         </ModalContainer>
     </ComponentContainer>);
 }
