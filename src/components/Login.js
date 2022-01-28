@@ -1,12 +1,52 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+    const [form, setForm] = useState({username: '', password: ''});
+    const [error, setError] = useState('');
+
+    const { push } = useHistory();
+
+    const handleChange = e => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    };
     
+    const handleSubmit = e => {
+        e.preventDefault();
+        axios.post(`http://localhost:9000/api/login`, form)
+        .then(res => {
+            localStorage.setItem("authToken", res.data.token);
+            push('/view');
+        })
+        .catch(err => {
+            setError(err);
+        })
+    };
+
+
     return(<ComponentContainer>
         <ModalContainer>
             <h1>Welcome to Blogger Pro</h1>
             <h2>Please enter your account information.</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Username
+                    <input id="username" onChange={handleChange} value={form.username} name="username"/>
+                </label>
+                <label>
+                    password
+                    <input id="password" onChange={handleChange} value={form.password} name="password"/>
+                </label>
+                <button type="submit">Login</button>
+            {
+                error && <p id="error">Incorrect username/password</p>
+            }
+            </form>
         </ModalContainer>
     </ComponentContainer>);
 }
